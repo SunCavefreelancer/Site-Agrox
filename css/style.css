@@ -1,0 +1,960 @@
+/*Обнуление*/
+*,*:before,:after {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    text-decoration: none;
+    letter-spacing: none;
+    list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+/* ------------------------------------------------------------------- */
+html,
+body {
+    height: 100%; /* прижимаем футер КНИЗУ */
+
+    line-height: 1;
+    font-size: 16px;
+    color: #000;
+
+    /*font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;*/
+
+}
+/* ------------------------------------------------------------------- */
+
+/* -------------------------оболочка для демонстрации----------------- */
+.wrapper {
+    min-height: 100%;/* прижимаем футер КНИЗУ */
+    display: flex; /* прижимаем футер КНИЗУ */
+    flex-direction: column; /* прижимаем футер КНИЗУ */
+    overflow: hidden;
+}
+/* -------------------------ТЕНИЧЕСКИЕ КЛАССЫ----------------- */
+._conteiner { /* общий ограничиваюий контейнер */
+    max-width: 1046px;
+    margin: 0 auto;
+    padding: 0px 20px;
+}
+._ibg { /* для всех используемых ibg */
+    position: relative;
+}
+._ibg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}/* -------------------------ТЕНИЧЕСКИЕ КЛАССЫ----------------- */
+
+
+main {
+    flex: 1 1 auto;
+}
+
+/* -------------------------основные стили------------------------ */
+
+.header {
+    margin-top: 80px;
+    position: relative; /* Наша ШАПКА - HEADER будет ФИКСИРОВАННОЙ, т.е.при скроле она всеглда будет сверху кнотента */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 50;/* делаем большой z-index ЧТОБЫ поверх контента была шапка*/
+}
+
+
+
+/* --------------------создаем ПЛАШКУ РОЗОВОГО ЦВЕТА----------------------*/
+.header:before {/* создаем ПЛАШКУ */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* т.е. на ВЕСЬ РАЗМЕР НАШЕЙ ШАПОЧКИ */
+    z-index: 2;
+}
+._conteiner { /* теперь ОГРАНИЧИМ по ШИРИНЕ КОНТЕНТ */
+    max-width: 960px;
+    margin: 0 auto; 
+    padding: 0px 20px; 
+}
+
+.header__body { /* теперь нам нужно ВЫТАЩИТЬ ВЕСЬ КОНТЕНТ НАВЕРХ из под ШАПКИ */
+    position: relative;
+    z-index: 2;
+    height: 80px; /* ВЫСОТА ШАПКИ header */
+
+    display: flex; /* ЗаДАЛИ flex что бы РАЗБРОСАТЬ по СТОРОНАМ лого и пункты меню */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+
+}
+#logo {
+	display:block;
+	background:url(img-2/logo.png) 0 0 no-repeat;
+	width:298px;
+	height:79px;
+	text-indent:-9999px
+}
+/*
+/* --------------------------------------------------ПЕРЕХОДИМ К верстке самих ПУНКТОВ МЕНЮ---------------------------------- */
+.header__list {
+    display: flex;
+    position: relative;
+    z-index: 2;
+}
+
+.menu_header_link { /* все ссылки отступы */
+    list-style: none;
+    margin: 0px 0px 0px 20px; 
+    text-transform: uppercase;
+    font-family: 'Noto Serif Balinese', serif;
+    font-size: 20px; 
+}
+
+.menu_header_link1 {  /* задаем всем ссылкам размер, шрифт, цвет */
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    text-transform: none;
+}
+.menu_header_link1:hover {
+    color: #eaedf6;
+    background-color: #33c208;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.7s;
+} 
+.link_vip { /* -------------------выделяем отдельно ссылку в меню -----------------  */
+    color: #eaedf6;
+    background-color: #33c208;
+    padding: 12px 20px;
+    border-radius: 7px;
+}
+.link_vip:hover {
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+
+ /* --------------------------------------------------переходим к верстке БУРГЕР-МЕНЮ--------------------------------- */
+.header__burger {
+    display: none;
+}
+.header__menu {
+}
+
+
+
+/* --------------------------------------------------ПЕРЕХОДИМ К верстке Медиа-Запрос для 767px-экранов---------------------------------- */
+
+/* будет выскакивать БУРГЕР-МЕНЮ при уменьшеении ЭКРАНОВ  */
+
+@media (max-width:767px) {
+    .header__body { /* уменьшаем ВЫСОТУ ШАПКИ header  */
+        height: 50px;
+    }
+
+    /* это будет бургер меню */
+    .header__burger {
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 20px;
+        position: relative;
+        z-index: 3;
+    } 
+
+    /* --------------------------здесь мы РИСУЕМ ПОЛОСОЧКИ БУРГЕР */ /* общие настройки-------------------------- */
+    .header__burger:before,
+    .header__burger:after {
+        content: "";
+        background-color: #080808;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left: 0;
+        transition: all 0.3s ease 0s; /* теперь переходят плавно полосочки */
+    }
+
+    /* --------------------------здесь мы РИСУЕМ Верхнюю ПОЛОСУ БУРГЕР-------------------------- */
+    .header__burger:before {
+        top: 0;  
+    }
+     /* --------------------------здесь мы РИСУЕМ Нижнюю ПОЛОСУ БУРГЕР-------------------------- */
+    .header__burger:after {
+        bottom: 0;  
+    }
+     /* --------------------------здесь мы РИСУЕМ СРЕДНЮЮ ПОЛОСУ БУРГЕР--------------------------- */
+    .header__burger span {
+        position: absolute;
+        background-color: #080808;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        top: 9px;
+        transition: all 0.3s ease 0s; /* теперь переходят плавно полосочки */
+    }
+
+    .header__burger.active:before {
+        transform: rotate(45deg); /* делаем палочку теперь на 45`,т.е.она стала по диагонале */
+        top: 9px; /* теперь подняли ее на центр */
+    }
+    .header__burger.active:after {
+        transform: rotate(-45deg); /* делаем палочку теперь на 45`,т.е.она стала по диагонале */
+        bottom: 9px; /* теперь подняли ее на центр */
+    }
+    .header__burger.active span {
+        transform: scale(0); /* убираем среднюю полосочку */
+    }
+    /* --------------------------здесь мы Закончили РИСОВАТЬ - БУРГЕ-------------------------- */
+
+
+
+    /* -----------------теперь стилизуем МЕНЮ----------------- */
+    .header__menu {
+        /* Делаем ПЛАСТИНУ которая будет ВЫЕЗЖАТЬ для пунктов меню */
+        position: fixed;
+        top: -100%; /* меню будет сьезжать сверху */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* будет скрол при повороте экрана телефона */
+        transition: all 0.3s ease 0s; /* теперь переходит плавно */    
+        background-color: #24b307; 
+        padding: 70px 10px 20px 10px; /* пункты меню вытащили из розовой плашки в РЯД */
+    }
+    .header__menu.active {
+        top: 0;
+    }
+
+    .header__list {
+        display: block; /* меню пункты встали в КОЛОНКУ */
+        text-align: center;
+    }
+    .header__list li { /* теперь сделали отступы между строчками меню в колонке */
+        margin: 0px 0px 20px 0px;
+    }
+
+    .header__list li {
+    font-size: 27px; /* сделали шрифт больше (с 20рх на 27рх), для СКРОЛА телефонов в горизонтальном положении!*/
+    }
+
+}
+
+/* -----------------теперь стилизуем МЕНЮ----------------- *
+
+
+
+
+/*-- -----------------------------------section 1-------------------------------------------------------------- --*/
+
+/* --------------------------------------------------------------------------- */
+.block__foto {
+    padding-top: 50px;
+    margin-bottom: 70px;
+    position: relative;
+    z-index: 10;
+}
+@media (max-width:767px) {
+    .block__foto {
+        padding-top: 60px;
+        margin-bottom: 70px;
+    }     
+}
+
+/* Ограничивающая оболочка */
+.slick-list { /* что бы не выглядывал край соседней фотографии СБОКУ */
+    overflow: hidden;
+}
+/* --------------------------------------------------------------------------- */
+
+/* Лента слайдов */ /* что бы все фото выстроились в РЯД */
+.slick-track{
+    display: flex; /* 1). уже работает СЛАЙДЕР, можно листать картинки */
+}
+/* --------------------------------------------------------------------------- */
+/* Стилизуем кнопки - точки */
+/* Точки (булиты) */
+.slider .slick-dots{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slider .slick-dots li{ /* растояние между кнопками-булитами */
+    list-style: none;
+    margin: 0px 10px;
+}
+.slider .slick-dots button{
+    font-size: 0;
+    width: 20px; /* размер кнопки */
+    height: 20px; /* размер кнопки */
+    background-color: #e6e7fd;
+    border: 1px solid #111010;
+    border-radius: 50%; /* круглые кнопки */
+}
+.slider .slick-dots li.slick-active button { /* делаем активную кнопку красной */
+    background-color: red;
+    border: 1px solid #111010;
+}
+/* --------------------------------------------------------------------------- */
+/* Здесь мы стилизуем для -КОНКРЕТНОГО СЛАДЙА- кнопки */
+.slider {
+    position: relative;
+    padding: 0px 60px; /* сделали отступы картинок от стрелок */
+}
+/* Стрелка */  
+.slider .slick-arrow{
+    position: absolute;
+    top: 50%;
+    margin: -40px 20px 0px 20px; /* выравниваем стрелку по центру картинки и страницы */
+    z-index: 10;
+    font-size: 0; /* убираем надписи на кнопках (теперь кнопки исчезли) */
+    width: 30px;
+    height: 60px;
+    border: none;
+}
+/* Стрелка ВЛЕВО*/ 
+.slider .slick-arrow.slick-prev{ /* здесь мы обращаемся к конктреной стрелке ВЛЕВО */
+    left: 0;
+    background: url(img-2/стрелка\ влево.png) 0 0 / 100% no-repeat; /* а здесь добавляем фото стрелочки ВЛЕВО */
+    color: #c521f2;
+} 
+/* Стрелка ВПРАВО*/ 
+.slider .slick-arrow.slick-next{ /* здесь мы обращаемся к конктреной стрелке ВПРАВО */
+    right: 0;
+    background: url(img-2/стрелка\ вправо.png)  0 0 / 100% no-repeat; /* а здесь добавляем фото стрелочки ВПРАВО  */
+} 
+/* --------------------------------------------------------------------------- */
+
+.slider__item img {
+    border: 6px solid #e6e7fd; /* сделали рамочку фотографиям */
+    border-radius: 10px;
+    max-width: 100%; /* адапитив фото при уменьшении */
+    /*background: url(img-2/slider_border.png);*/
+}
+/* --------------------------------------------------------------------------- */
+.slider__item {
+    text-align: center;/* поставили ПО ЦЕНТРУ картинки */
+}
+/* --------------------------------------------------------------------------- */
+
+
+
+
+/* =============================================section_2=================================================== */
+
+.section_2 {
+    background-color: #0e0d0d;
+    margin-top: -280px;
+    padding: 0px 0px 80px 0px;
+    position: relative; /* для фона */
+    z-index: 1;           /* для фона */
+}
+@media (max-width:500px) {
+    .section_2 {
+        margin-top: -200px;
+    }     
+}
+@media (max-width:364px) {
+    .section_2 {
+        padding: 0px 0px 0px 0px;
+    }     
+}
+@media (max-width:320px) {
+    .section_2 {
+        margin-top: 0px;
+    }     
+}
+.page-2_conteiner {
+}
+._conteiner {
+}
+
+.page-2_VIP-TEXT { /* text New-Technologies */
+    font-size: 40px;
+    color: #fafafa;
+    text-align: left;
+
+    position: relative;  /* вытащили текст на верх */
+    z-index: 2;
+
+    padding-top: 280px;
+}
+@media (max-width:500px) {
+    .page-2_VIP-TEXT {
+        padding-top: 180px;
+        font-size: 35px;
+    }     
+}
+@media (max-width:320px) {
+    .page-2_VIP-TEXT {
+        padding-top: 40px;
+        font-size: 35px;
+    }     
+}
+
+/* БЛОК 3 колонки */
+.page-2-New-Technologies {
+    padding: 50px 0px 0px 0px;
+
+}
+.page-2_COLUMNS {
+    display: flex;
+    margin: 0 -15px;
+
+    /*border:  1px solid greenyellow;*/
+}
+@media (max-width:992px) {
+    .page-2_COLUMNS {
+        flex-wrap: wrap;
+    }
+}
+.page-2_COLUMN >*:not(:last-child) {
+    padding: 0px 0px 15px 0px;
+}
+.page-2_COLUMN {
+    flex:  0 1 33.333%;
+    padding: 0 15px;
+
+    /*border:  1px solid rgb(255, 182, 47);*/
+}
+@media (max-width:992px) {
+    .page-2_COLUMN {
+        flex: 0 1 50%;
+        padding: 0px 20px 50px 20px;
+    }
+}
+@media (max-width:767px) {
+    .page-2_COLUMN {
+        flex: 0 1 100%;
+        padding: 0px 20px 50px 20px;
+    }
+}
+
+.page-2_TEXT {
+    display: flex;
+}
+.TEXT_a {
+    color: #f70606;
+    font-size: 50px;
+    background-color: #ddd9d9;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0px 17px;
+    margin-right: 25px;
+}
+._TEXT_b {
+    color: #e0ae07;
+}
+._TEXT_c {
+    color: #13c004;
+}
+.TEXT_Agrox-is h3{
+    font-size: 16px;
+    color: #fafafa;
+    line-height: 130%;
+}
+.page-2_SUBTEXT {
+    font-size: 16px;
+    color: #d4d1d1;
+    line-height: 130%;
+}
+.page-2-button a {
+    color: inherit;
+}
+.page-2-button {
+    color: #e6e7fd;
+    font-style: italic;
+}
+/* =============================================section_2=================================================== */
+
+
+
+/* ===============================================page-3============================================ */
+.section_3 {
+    margin-top: 0px;
+    padding: 80px 0px 80px 0px;
+    background-color: #181412;
+
+    position: relative;  /* для фона */
+    z-index: 0;          /* для фона */
+}
+@media (max-width:320px) {
+    .section_3 {
+        padding: 40px 0px 50px 0px;
+    }     
+}
+
+.page-3_conteiner {
+}
+
+._conteiner {
+}
+
+.page-3_VIP-TEXT {
+     font-size: 40px;
+     letter-spacing: -2px;
+     text-align: left;
+     color: #fafafa;
+}
+@media (max-width:320px) {
+    .page-3_VIP-TEXT {
+        font-size: 32px;
+    }     
+}
+.page-3_We-Want-to_BIG {
+    display: flex;
+
+}
+@media (max-width:992px) {
+    .page-3_We-Want-to_BIG  {
+        flex-wrap: wrap;
+    }
+}
+.page-3_We-Want-to_BIG_RIGHT >*:not(:last-child){
+    padding: 0px 0px 15px 0px;
+}
+
+/* - */
+
+.page-3_We-Want-to_BIG_RIGHT {
+    flex: 0 1 50%;
+    margin-right: 50px;
+}
+@media (max-width:992px) {
+    .page-3_We-Want-to_BIG_RIGHT {
+        flex: 0 1 100%;
+        margin-right: 50px;
+        padding: 0px 0px 70px 0px;
+    }
+}
+
+/* -- */
+.page-3_We-Want-LEFT {
+    flex: 0 1 50%;
+}
+@media (max-width:992px) {
+    .page-3_We-Want-LEFT {
+        flex: 0 1 100%;
+    }
+}
+.page-3_We-Want-to {
+    display: flex;
+}
+
+.page-3_We-Want-to_line { /* | -линия  */
+    margin-right: 25px;
+}
+.page-3_We-Want-to_TITLE h3{ /* text - Sed ut perspiciatis  */
+    color: #706666;
+    line-height: 120%;
+    font-style: italic;
+}
+
+.page-3_We-Want-to_TITLE h3::before { /* text - Sed ut perspiciatis  */
+    content: url(img-2/quot1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+
+    position: relative;
+    z-index: 5;
+}
+.page-3_We-Want-to_TITLE h3::after { /* text - Sed ut perspiciatis  */
+    content: url(img-2/quot2.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+
+    position: relative;
+    z-index: 5;
+}
+
+
+
+.page-3_We-Want-to_DOWN {
+    padding: 20px 0px 0px 0px;
+}
+.page-3_We-Want-to_DOWN h2{
+    color: #f8f8f8;
+    font-size: 15px;
+    font-style: italic;
+    padding: 15px 0px 20px 0px;
+}
+@media (max-width:992px) {
+    .page-3_We-Want-to_DOWN h2 {
+        font-size: 20px;
+    }
+}
+
+
+.page-3_nav {
+
+}
+.page-3_list {
+    display: flex;
+}
+@media (max-width:600px) {
+    .page-3_list {
+     flex-wrap: wrap;
+    }
+}
+.page-3_list a {
+    color: inherit;
+    color: #f8f8f8;
+    line-height: 140%;
+    font-size: 15px;
+    color: #3bc91e;
+}
+@media (max-width:992px) {
+    .page-3_list a {
+        font-size: 20px;
+    }
+}
+@media (max-width:340px) {
+    .page-3_list a {
+        font-size: 16px;
+    }
+}
+
+.page-3_list a:hover {
+     color: #f8f3f3;
+     cursor: pointer;
+     transition: 0.6s;
+}
+.page-3_list_RIGHT {
+    margin-right: 25px;
+}
+.page-3_link  {
+    
+}
+.page-3_link::before {      /* вставили картинкуперед ссылками */
+    content: url(img-2/marker_1.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    margin-right: 15px;
+    position: relative;
+    z-index: 5;
+}
+
+
+
+
+.page-3_Our-Products {
+}
+
+.page-3_Our-Products_ROW {
+    padding: 25px 0px 0px 0px;
+    display: flex;
+    color: #fafafa;
+}
+
+
+.page-3_Our-Products_TEXT {
+    margin-left: 20px;
+}
+.page-3_Our-Products_TEXT h3 {
+    color: #6dd30d;
+    font-size: 15px;
+}
+@media (max-width:992px) {
+    .page-3_Our-Products_TEXT h3 {
+        font-size: 20px;
+
+    }
+}
+@media (max-width:340px) {
+    .page-3_Our-Products_TEXT h3 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width:660px) {
+    .page-3_Our-Products_TEXT h4 {
+        font-size: 17px;
+        padding: 0px 0px 10px 0px;
+    }
+}
+
+.page-3_Our-Products_TEXT h4 {
+    color: #706666;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 110%;
+}
+@media (max-width:992px) {
+    .page-3_Our-Products_TEXT h4 {
+        font-size: 20px;
+        line-height: 120%;
+        padding: 0px 0px 10px 0px;
+    }
+}
+@media (max-width:660px) {
+    .page-3_Our-Products_TEXT h4 {
+        font-size: 17px;
+        line-height: 100%;
+        padding: 0px 0px 5px 0px;
+    }
+}
+@media (max-width:340px) {
+    .page-3_Our-Products_TEXT h4 {
+        font-size: 14px;
+    }
+}
+
+.page-2-button {
+}
+/* ==========================================page-3=============================================== */
+
+
+/* ==========================================footer============================================== */
+
+.footer {
+    padding: 80px 0px 80px 0px;
+    background-color: #0e0d0d;
+}
+.footer_conteiner {
+}
+._conteiner {
+}
+
+
+.footer_COLUMNS {
+    display: flex;
+    flex-wrap: wrap;
+
+    border-bottom: 1px solid #686767;
+
+}
+
+
+.footer_COLUMN {
+    flex: 0 1 33.333%;
+
+}
+@media(max-width:992px) {
+    .footer_COLUMN {
+        flex: 0 1 50%;
+        padding: 0px 0px 70px 0px;
+    
+    }
+}
+
+@media(max-width:767px) {
+    ._footer_COLUMN2, ._footer_COLUMN2 {
+        flex: 0 1 100%;
+
+    }
+}
+@media(max-width:992px) {
+    ._footer_COLUMN3 {
+        flex: 0 1 100%;
+
+    }
+}
+
+
+.Name {
+    margin-right: 35px;
+}
+.Mail {
+    margin-right: 30px;
+}
+.massage {
+    margin-right: 18px;
+}
+
+.footer_COLUMN >*:not(:last-child){
+    padding: 0px 0px 15px 0px;
+}
+.footer_COLUMN-TITLE {
+    font-size: 30px;
+    color: #fffefe;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+
+.footer_nav {
+
+}
+
+.footer_list  >*:not(:last-child){
+    padding: 0px 0px 15px 0px;
+    display: block;
+}
+.footer_list a{
+    color: inherit;
+    color: #868383;
+    font-size: 17px;
+}
+.footer_list a:hover {
+    cursor: pointer;
+    color: #f8f3f3;
+    transition: 0.7s;
+}
+
+._footer_link-Facebook::before {
+    content: url(img-2/icon1.jpg);
+    margin-right: 15px;
+}
+._footer_link-Twitter::before {
+    content: url(img-2/icon2.jpg);
+    margin-right: 15px;
+}
+._footer_link-Linked-In::before {
+    content: url(img-2/icon3.jpg);
+    margin-right: 15px;
+}
+
+
+.footer_link a{
+    color: inherit;
+    color: #686767;
+}
+
+
+.footer_link2::before {
+    content: url(img-2/marker_1.png);
+    margin-right: 15px;
+}
+
+
+
+/* -------------------FORM------------------- */
+.group {
+    margin: 2px; /* растояние между полями для заполнения */
+    /*padding: 5px;*/
+    color: #686767;
+}
+label {
+    color: #f8efef;
+    text-shadow: 2px 2px 5px rgba(20, 20, 20, 0.82) /* тень рамки для ввода */
+}
+input {
+    margin: 10px 0px 10px 0px; /* ---------------делаем растояние меджу пунками для заполнения ------ */
+
+}
+textarea {
+    height: 75px;
+    width: 300px;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    border-radius: 3px;
+    background-color: none;
+    color: #686767;
+}
+@media(max-width:345px) {
+    textarea {
+        padding: 0px 35px 0px 0px;
+        width: 250px;
+
+    }
+}
+.form_name { /* рамочка для ввода 1*/
+    font-size: 13px;
+    color: #686767;
+    padding-left: 10px;
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: none;
+}
+@media(max-width:345px) {
+    .form_name {
+        padding: 0px 35px 0px 0px;
+        width: 250px;
+
+    }
+}
+.form_mail { /* рамочка для ввода 2 */
+    font-size: 13px;
+    color: #686767;
+    padding-left: 10px;
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+}
+@media(max-width:345px) {
+    .form_mail {
+        padding: 0px 35px 0px 0px;
+        width: 250px;
+
+    }
+}
+
+
+.form_button {
+    margin: 20px 0px 15px 0px;
+    color: #eaedf6;
+    background-color: #33c208;
+    padding: 12px 20px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 700;
+}
+@media(max-width:992px) {
+    .form_button {
+        margin: 20px 0px 0px 120px;
+    }
+}
+@media(max-width:464px) {
+    .form_button {
+        margin: 20px 0px 0px 0px;
+    }
+}
+@media(max-width:360px) {
+    .form_button {
+        margin: 10px 0px -40px 0px;
+    }
+}
+.form_button:hover {
+    cursor: pointer;
+    background: #fff;
+    color: #3b3b3b;
+    transition: 0.7s;
+}
+
+
+.footer_DOWN {
+    color: #686767;
+    text-align: left;
+    line-height: 150%;
+    margin-top: 20px;
+    font-size: 17px;
+}
+@media(max-width:360px) {
+    .footer_DOWN {
+       font-size: 13px;
+    }
+}
+.span_Domain {
+    color: #f8f3f3;
+    text-decoration: underline;
+}
+/* ==========================================footer============================================== */

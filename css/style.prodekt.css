@@ -1,0 +1,684 @@
+/*Обнуление*/
+*,*:before,:after {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    text-decoration: none;
+    letter-spacing: none;
+    list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+/* ------------------------------------------------------------------- */
+html,
+body {
+    height: 100%; /* прижимаем футер КНИЗУ */
+
+    line-height: 1;
+    font-size: 16px;
+    color: #000;
+
+
+}
+/* ------------------------------------------------------------------- */
+
+/* -------------------------оболочка для демонстрации----------------- */
+.wrapper {
+    min-height: 100%;/* прижимаем футер КНИЗУ */
+    display: flex; /* прижимаем футер КНИЗУ */
+    flex-direction: column; /* прижимаем футер КНИЗУ */
+    overflow: hidden;
+}
+/* -------------------------ТЕНИЧЕСКИЕ КЛАССЫ----------------- */
+._conteiner { /* общий ограничиваюий контейнер */
+    max-width: 1046px;
+    margin: 0 auto;
+    padding: 0px 20px;
+}
+._ibg { /* для всех используемых ibg */
+    position: relative;
+}
+._ibg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}/* -------------------------ТЕНИЧЕСКИЕ КЛАССЫ----------------- */
+
+main {
+    flex: 1 1 auto;
+}
+
+/* -------------------------основные стили------------------------ */
+
+.header {
+    margin-top: 30px;
+    position: relative; /* Наша ШАПКА - HEADER будет ФИКСИРОВАННОЙ, т.е.при скроле она всеглда будет сверху кнотента */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 50;/* делаем большой z-index ЧТОБЫ поверх контента была шапка*/
+}
+
+
+
+/* --------------------создаем ПЛАШКУ РОЗОВОГО ЦВЕТА----------------------*/
+.header:before {/* создаем ПЛАШКУ */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* т.е. на ВЕСЬ РАЗМЕР НАШЕЙ ШАПОЧКИ */
+    z-index: 2;
+}
+._conteiner { /* теперь ОГРАНИЧИМ по ШИРИНЕ КОНТЕНТ */
+    max-width: 960px;
+    margin: 0 auto; 
+    padding: 0px 20px; 
+}
+
+.header__body { /* теперь нам нужно ВЫТАЩИТЬ ВЕСЬ КОНТЕНТ НАВЕРХ из под ШАПКИ */
+    position: relative;
+    z-index: 2;
+    height: 180px; /* ВЫСОТА ШАПКИ header */
+
+    display: flex; /* ЗаДАЛИ flex что бы РАЗБРОСАТЬ по СТОРОНАМ лого и пункты меню */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+
+}
+#logo {
+	display:block;
+	background:url(img-2/logo.png) 0 0 no-repeat;
+	width:298px;
+	height:79px;
+	text-indent:-9999px
+}
+/*
+/* --------------------------------------------------ПЕРЕХОДИМ К верстке самих ПУНКТОВ МЕНЮ---------------------------------- */
+.header__list {
+    display: flex;
+    position: relative;
+    z-index: 2;
+}
+
+.menu_header_link { /* все ссылки отступы */
+    list-style: none;
+    margin: 0px 0px 0px 20px; 
+    text-transform: uppercase;
+    font-family: 'Noto Serif Balinese', serif;
+    font-size: 20px; 
+}
+
+.menu_header_link1 {  /* задаем всем ссылкам размер, шрифт, цвет */
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    text-transform: none;
+}
+.menu_header_link1:hover {
+    color: #eaedf6;
+    background-color: #33c208;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.7s;
+} 
+.link_vip { /* -------------------выделяем отдельно ссылку в меню -----------------  */
+    color: #eaedf6;
+    background-color: #33c208;
+    padding: 12px 20px;
+    border-radius: 7px;
+}
+.link_vip:hover {
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+
+ /* --------------------------------------------------переходим к верстке БУРГЕР-МЕНЮ--------------------------------- */
+.header__burger {
+    display: none;
+}
+.header__menu {
+}
+
+
+
+/* --------------------------------------------------ПЕРЕХОДИМ К верстке Медиа-Запрос для 767px-экранов---------------------------------- */
+
+/* будет выскакивать БУРГЕР-МЕНЮ при уменьшеении ЭКРАНОВ  */
+
+@media (max-width:767px) {
+    .header__body { /* уменьшаем ВЫСОТУ ШАПКИ header  */
+        height: 50px;
+    }
+
+    /* это будет бургер меню */
+    .header__burger {
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 20px;
+        position: relative;
+        z-index: 3;
+    } 
+
+    /* --------------------------здесь мы РИСУЕМ ПОЛОСОЧКИ БУРГЕР */ /* общие настройки-------------------------- */
+    .header__burger:before,
+    .header__burger:after {
+        content: "";
+        background-color: #080808;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left: 0;
+        transition: all 0.3s ease 0s; /* теперь переходят плавно полосочки */
+    }
+
+    /* --------------------------здесь мы РИСУЕМ Верхнюю ПОЛОСУ БУРГЕР-------------------------- */
+    .header__burger:before {
+        top: 0;  
+    }
+     /* --------------------------здесь мы РИСУЕМ Нижнюю ПОЛОСУ БУРГЕР-------------------------- */
+    .header__burger:after {
+        bottom: 0;  
+    }
+     /* --------------------------здесь мы РИСУЕМ СРЕДНЮЮ ПОЛОСУ БУРГЕР--------------------------- */
+    .header__burger span {
+        position: absolute;
+        background-color: #080808;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        top: 9px;
+        transition: all 0.3s ease 0s; /* теперь переходят плавно полосочки */
+    }
+
+    .header__burger.active:before {
+        transform: rotate(45deg); /* делаем палочку теперь на 45`,т.е.она стала по диагонале */
+        top: 9px; /* теперь подняли ее на центр */
+    }
+    .header__burger.active:after {
+        transform: rotate(-45deg); /* делаем палочку теперь на 45`,т.е.она стала по диагонале */
+        bottom: 9px; /* теперь подняли ее на центр */
+    }
+    .header__burger.active span {
+        transform: scale(0); /* убираем среднюю полосочку */
+    }
+    /* --------------------------здесь мы Закончили РИСОВАТЬ - БУРГЕ-------------------------- */
+
+
+
+    /* -----------------теперь стилизуем МЕНЮ----------------- */
+    .header__menu {
+        /* Делаем ПЛАСТИНУ которая будет ВЫЕЗЖАТЬ для пунктов меню */
+        position: fixed;
+        top: -100%; /* меню будет сьезжать сверху */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* будет скрол при повороте экрана телефона */
+        transition: all 0.3s ease 0s; /* теперь переходит плавно */    
+        background-color: #24b307; 
+        padding: 70px 10px 20px 10px; /* пункты меню вытащили из розовой плашки в РЯД */
+    }
+    .header__menu.active {
+        top: 0;
+    }
+
+    .header__list {
+        display: block; /* меню пункты встали в КОЛОНКУ */
+        text-align: center;
+    }
+    .header__list li { /* теперь сделали отступы между строчками меню в колонке */
+        margin: 0px 0px 20px 0px;
+    }
+
+    .header__list li {
+    font-size: 27px; /* сделали шрифт больше (с 20рх на 27рх), для СКРОЛА телефонов в горизонтальном положении!*/
+    }
+
+}
+
+/* -----------------теперь стилизуем МЕНЮ----------------- *
+
+
+
+
+/*-- -----------------------------------page-1-Useful-Info-------------------------------------------------------------- --*/
+.section_1 {
+    padding:50px 0px 80px 0px;
+    background-color: #030303;
+}
+@media (max-width:767px) {
+    .section_1 {
+        margin:50px 0px -20px 0px;
+        background-color: #030303;
+    }
+}
+
+.page-2_conteiner {
+}
+._conteiner {
+}
+.page-1_VIP-TEXT {    /* text Useful-Info */
+    font-size: 40px;
+    color: #fafafa;
+    text-align: left;
+
+}
+
+/* БЛОК 3 колонки */
+.page-1-Useful-Info {    
+    padding: 50px 0px 0px 0px;
+}
+
+.page-1_COLUMNS-Useful-Info {
+    display: flex;
+    margin: 0 -15px;
+
+    flex-wrap: wrap;
+}
+
+
+.page-1_COLUMN-Useful-Info {
+    flex:  0 1 33.333%;
+    padding: 0 15px;
+}
+@media (max-width:992px) {
+    .page-1_COLUMN-Useful-Info {
+        flex: 0 1 50%;
+        padding: 0px 15px 50px 15px;
+    }     
+}
+@media (max-width:767px) {
+    .page-1_COLUMN-Useful-Info {
+        flex: 0 1 100%;
+        padding: 0px 15px 50px 15px;
+    }     
+}
+
+.page-1_COLUMN-Useful-Info >*:not(:last-child) {
+    padding: 0px 0px 15px 0px;
+}
+
+.page-1_TEXT-Useful-Info {
+    display: flex;
+}
+
+.TEXT_Agrox-is-Useful-Info {
+    font-size: 16px;
+    color: #fafafa;
+    line-height: 130%;
+}
+.page-1_SUBTEXT-Useful-Info {
+    font-size: 16px;
+    color: #d4d1d1;
+    line-height: 130%;
+}
+.page-1-button-Useful-Info a {
+    color: inherit;
+    font-style: italic;
+    color: #d4d1d1;
+
+}
+.TEXT_a {
+    color: #f70606;
+    font-size: 40px;
+    background-color: #ddd9d9;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0px 7px;
+    margin-right: 25px;
+}
+._TEXT_01  {
+    color: #e90606;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+._TEXT_02 {
+    color: #e0ae07;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+._TEXT_03 {
+    color: #13c004;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ==========================================Useful-Info============================================= */
+
+
+
+/* ------------------------------------------Our-Featured-Products------------------------------------------------------------ */
+.section_2 {
+    padding: 50px 0px 50px 0px;
+    background-color: #181412;
+}
+@media (max-width:767px) {
+    .section_2 {
+        padding: 50px 0px 50px 0px;
+
+    } 
+}
+
+.page-2-Our-Featured-Products_conteiner {
+}
+._conteiner {
+}
+
+
+.page-2-Our-Featured-Products_VIP-TEXT { /* Our-Featured-Products */
+    margin-bottom: 20px;
+    font-size: 40px;
+    color: #fafafa;
+    text-align: left;
+}
+
+
+.page-2-Our-Featured-Products_COLUMNS {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -20px;
+}
+.page-2-Our-Featured-Products_COLUMN >*:not(:last-child) {
+    padding: 15px 0px 0px 0px;
+}
+.page-2-Our-Featured-Products_COLUMN {
+    flex: 0 1 25%;
+    padding: 0 20px;
+}
+@media (max-width:992px) {
+    .page-2-Our-Featured-Products_COLUMN {
+        flex: 0 1 50%;
+        padding: 0 20px 50px 20px;
+    }  
+}
+@media (max-width:767px) {
+    .page-2-Our-Featured-Products_COLUMN {
+        flex: 0 1 100%;
+        padding: 0 20px 50px 20px;
+    }  
+}
+
+.page-2-Our-Featured-Products_img {
+}
+.page-2-Our-Featured-Products_NAME {
+    color: #13c004;
+}
+.page-2-Our-Featured-Products_TITLE {
+    color: #cfc9c9;
+    line-height: 130%;
+}
+.page-1-button-Useful-Info {
+    margin-top: 20px;
+}
+.page-1-button-Useful-Info a:hover {
+    cursor: pointer;
+    transition: 0.8s;
+    text-decoration: underline;
+    color: #13c004;
+}
+
+/* ------------------------------------------Our-Featured-Products------------------------------------------------------------ */
+
+
+
+
+/* ==========================================footer============================================== */
+
+.footer {
+    padding: 80px 0px 80px 0px;
+    background-color: #0e0d0d;
+}
+.footer_conteiner {
+}
+._conteiner {
+}
+
+
+.footer_COLUMNS {
+    display: flex;
+    flex-wrap: wrap;
+
+    border-bottom: 1px solid #686767;
+
+}
+
+
+.footer_COLUMN {
+    flex: 0 1 33.333%;
+
+}
+@media(max-width:992px) {
+    .footer_COLUMN {
+        flex: 0 1 50%;
+        padding: 0px 0px 70px 0px;
+    
+    }
+}
+
+@media(max-width:767px) {
+    ._footer_COLUMN2, ._footer_COLUMN2 {
+        flex: 0 1 100%;
+
+    }
+}
+@media(max-width:992px) {
+    ._footer_COLUMN3 {
+        flex: 0 1 100%;
+
+    }
+}
+
+
+.Name {
+    margin-right: 35px;
+}
+.Mail {
+    margin-right: 30px;
+}
+.massage {
+    margin-right: 18px;
+}
+
+.footer_COLUMN >*:not(:last-child){
+    padding: 0px 0px 15px 0px;
+}
+.footer_COLUMN-TITLE {
+    font-size: 30px;
+    color: #fffefe;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+
+.footer_nav {
+
+}
+
+.footer_list  >*:not(:last-child){
+    padding: 0px 0px 15px 0px;
+    display: block;
+}
+.footer_list a{
+    color: inherit;
+    color: #868383;
+    font-size: 17px;
+}
+.footer_list a:hover {
+    cursor: pointer;
+    color: #f8f3f3;
+    transition: 0.7s;
+}
+
+._footer_link-Facebook::before {
+    content: url(img-2/icon1.jpg);
+    margin-right: 15px;
+}
+._footer_link-Twitter::before {
+    content: url(img-2/icon2.jpg);
+    margin-right: 15px;
+}
+._footer_link-Linked-In::before {
+    content: url(img-2/icon3.jpg);
+    margin-right: 15px;
+}
+
+
+.footer_link a{
+    color: inherit;
+    color: #686767;
+}
+
+
+.footer_link2::before {
+    content: url(img-2/marker_1.png);
+    margin-right: 15px;
+}
+
+
+
+/* -------------------FORM------------------- */
+.group {
+    margin: 2px; /* растояние между полями для заполнения */
+    /*padding: 5px;*/
+    color: #686767;
+}
+label {
+    color: #f8efef;
+    text-shadow: 2px 2px 5px rgba(20, 20, 20, 0.82) /* тень рамки для ввода */
+}
+input {
+    margin: 10px 0px 10px 0px; /* ---------------делаем растояние меджу пунками для заполнения ------ */
+
+}
+textarea {
+    height: 75px;
+    width: 300px;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    border-radius: 3px;
+    background-color: none;
+    color: #686767;
+}
+@media(max-width:345px) {
+    textarea {
+        padding: 0px 35px 0px 0px;
+        width: 250px;
+
+    }
+}
+.form_name { /* рамочка для ввода 1*/
+    font-size: 13px;
+    color: #686767;
+    padding-left: 10px;
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: none;
+}
+@media(max-width:345px) {
+    .form_name {
+        padding: 0px 35px 0px 0px;
+        width: 250px;
+
+    }
+}
+.form_mail { /* рамочка для ввода 2 */
+    font-size: 13px;
+    color: #686767;
+    padding-left: 10px;
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+}
+@media(max-width:345px) {
+    .form_mail {
+        padding: 0px 35px 0px 0px;
+        width: 250px;
+
+    }
+}
+
+
+.form_button {
+    margin: 20px 0px 15px 0px;
+    color: #eaedf6;
+    background-color: #33c208;
+    padding: 12px 20px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 700;
+}
+@media(max-width:992px) {
+    .form_button {
+        margin: 20px 0px 0px 120px;
+    }
+}
+@media(max-width:464px) {
+    .form_button {
+        margin: 20px 0px 0px 0px;
+    }
+}
+@media(max-width:360px) {
+    .form_button {
+        margin: 10px 0px -40px 0px;
+    }
+}
+.form_button:hover {
+    cursor: pointer;
+    background: #fff;
+    color: #3b3b3b;
+    transition: 0.7s;
+}
+
+
+.footer_DOWN {
+    color: #686767;
+    text-align: left;
+    line-height: 150%;
+    margin-top: 20px;
+    font-size: 17px;
+}
+@media(max-width:360px) {
+    .footer_DOWN {
+       font-size: 13px;
+    }
+}
+.span_Domain {
+    color: #f8f3f3;
+    text-decoration: underline;
+}
+/* ==========================================footer============================================== */
